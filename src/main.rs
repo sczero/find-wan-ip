@@ -1,5 +1,4 @@
 use std::collections::HashMap;
-use std::thread;
 
 use clap::Parser;
 use tokio::time::{Duration, sleep};
@@ -38,9 +37,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             //更新远程IP
             println!("{}", ip);
         };
-
+        count += 1;
         println!("循环次数:{}", count);
         //休眠
-        sleep(Duration::from_secs(10));
+        sleep(Duration::from_secs(10)).await;
     }
 }
