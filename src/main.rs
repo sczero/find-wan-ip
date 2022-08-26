@@ -50,6 +50,10 @@ async fn run(args: &Args, wan_ip: &mut String) -> Result<(), Box<dyn Error>> {
         println!("当前的WAN地址为:{}", wan_ip);
         match args.platform.as_str() {
             "cloudflare" => {
+                if args.zone.is_empty() || args.auth_email.is_empty() || args.auth_key.is_empty() || args.domain_name.is_empty() {
+                    eprintln!("zone,auth_email,auth_key,domain_name不能为空");
+                    return Ok(());
+                }
                 //先查询
                 let url = &format!("https://api.cloudflare.com/client/v4/zones/{zone}/dns_records", zone = args.zone);
                 let resp_json = client.get(url).header("Content-Type", "application/json")
