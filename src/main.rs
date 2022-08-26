@@ -29,9 +29,9 @@ async fn main() {
     let mut wan_ip = String::new();
     let mut interval = interval(Duration::from_secs(60));
     loop {
+        interval.tick().await;
         let result = run(&args, &mut wan_ip).await;
         println!("执行时间:{},执行结果:{}", Local::now().format("%Y-%m-%d %H:%M:%S"), result.is_ok());
-        interval.tick().await;
     }
 }
 
